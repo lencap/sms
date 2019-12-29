@@ -7,7 +7,7 @@ Install the latest release via Homebrew:
 `$ brew install lencap/tools/sms`
 
 ## Configure
-Make sure you already able to send text messages via Messages application.
+Make sure you are already able to send text messages via Messages application.
 
 ## Run
 `$ sms 2015554444 "Hello world"`
