@@ -4,7 +4,7 @@
  
 // Global constants and variables initialization
 const char prgname[64] = "smsclic";
-const char prgver[16]  = "1.0.0";
+const char prgver[16]  = "1.1.0";
 char cfgfile[64] = "";  
 char svcurl[256] = "https://textbelt.com/text";
 char svckey[256] = "textbelt";

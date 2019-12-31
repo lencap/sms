@@ -50,7 +50,7 @@ func CreateSkeltonConfigFile() {
         err = ioutil.WriteFile(cfgfile, []byte(content), 0600)
         if err != nil {
             panic(err.Error())
-        }        
+        }
     } else {
         fmt.Printf("There's already a %s file.\n", cfgfile)
     }

@@ -1,5 +1,6 @@
 #!/bin/bash
 # sms.sh
+# v1.1.0
 # Use textbelt.com services to send SMS
 
 [[ "$#" -ne 2 ]] && printf "Usage: $0 TEL 'message'\n" && exit

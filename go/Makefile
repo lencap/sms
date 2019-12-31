@@ -2,7 +2,7 @@
 # Assumes GOPATH is set up properly, e.g., $HOME/go
 
 TARGET := smscli
-VERSION := 1.0.4
+VERSION := 1.1.0
 
 default:
 	GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o $(TARGET)

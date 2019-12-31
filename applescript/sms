@@ -1,5 +1,6 @@
 #!/usr/bin/osascript
 # sms
+# v1.1.0
 
 on waitUntilRunning(appName, delayTime)
   repeat until application appName is running

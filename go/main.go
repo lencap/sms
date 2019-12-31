@@ -5,14 +5,14 @@ import (
     "fmt"
     "os"
     "net/http"
-    "net/url"    
+    "net/url"
 )
 
 // Global constants
 const (
     prgname = "smscli"
-    prgver  = "1.0.3"
-    
+    prgver  = "1.1.0"
+
 )
 
 // Global variables
@@ -24,7 +24,7 @@ var (
 
 
 func main() {
-  
+
     tel, msg := "", ""
     argCount := len(os.Args[1:])
 
@@ -44,7 +44,7 @@ func main() {
         "key": {svckey},
         "phone": {tel},
         "message": {msg},
-    }    
+    }
     fmt.Printf("%s  %s  %s\n", svckey, tel, msg)
     resp, err := http.PostForm(svcurl, values)
     if err != nil {
