@@ -19,6 +19,8 @@ Each `Makefile` within the respective language directory also allows an option t
 
 `make install`
 
+CORRECTION: Didn't bother creating a brew formula for the Bash one.
+
 ## Compilation
 For the ones needing compilation, read the respective `Makefile` for more info.
 
