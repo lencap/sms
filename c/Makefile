@@ -1,5 +1,7 @@
-TARGET := smsclic
+TARGET  := smsclic
 VERSION := 1.1.1
+CC      = gcc
+CFLAGS  = -g -Wall
 
 .PHONY: release install clean
 
@@ -9,7 +11,7 @@ OBJS = $(SRCS:.c=.o)
 LDFLAGS = -lcurl
 
 $(TARGET): $(OBJS)
-	gcc -o $@ $^ $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 release:
 	tar czf $(TARGET)-$(VERSION).tar.gz $(TARGET)
