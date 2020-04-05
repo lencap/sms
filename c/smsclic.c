@@ -4,7 +4,7 @@
  
 // Global constants and variables initialization
 const char prgname[64] = "smsclic";
-const char prgver[16]  = "1.1.1";
+const char prgver[16]  = "1.1.2";
 char cfgfile[64] = "";  
 char svcurl[256] = "https://textbelt.com/text";
 char svckey[256] = "textbelt";
@@ -12,7 +12,6 @@ char svckey[256] = "textbelt";
 
 int main(int argc, char *argv[])
 {
-    char buf[256];
     char tel[32];
     char msg[4096];
     char data[6000];
@@ -26,7 +25,7 @@ int main(int argc, char *argv[])
     if (argc == 2) {
         if (!strcmp(argv[1], "-y")) {
             CreateSkeletonConfigFile();
-            Die(0,"");
+            exit(0);
         }
         PrintUsage();
     }
@@ -35,10 +34,12 @@ int main(int argc, char *argv[])
     strcpy(tel, argv[1]);
     strcpy(msg, argv[2]);
     if (strlen(tel) > 10) {
-        Die(1, "Error. CellPhoneNum cannot be greater than 10 chars.");
+        fprintf(stderr, "CellPhoneNum cannot be greater than 10 chars.");
+        exit(1);
     }
     if (strlen(msg) > 4095) {
-        Die(1, "Error. Message cannot be greater than 4096 chars.");
+        fprintf(stderr, "Message cannot be greater than 4096 chars.");
+        exit(1);
     }
     // Needs more error checking
 
@@ -55,15 +56,16 @@ int main(int argc, char *argv[])
 
     CURLPostData(svcurl, data);
 
-    Die(0, "");
+    exit(0);
 }
 
 // Usage
 void PrintUsage(void)
 {
-    fprintf(stdout, "SMS CLI utility %s\n", prgver);
-    fprintf(stdout, "%s <CellPhoneNum> <Message>\n", prgname);
-    fprintf(stdout, "%s -y Create skeleton ~/.%src file\n", prgname, prgname);
-    fprintf(stdout, "Visit https://textbelt.com for more info.\n");
-    Die(0, "");
+    fprintf(stdout, "SMS CLI utility %s\n"
+        "%s <CellPhoneNum> <Message>\n"
+        "%s -y Create skeleton ~/.%src file\n"
+        "Visit https://textbelt.com for more info.\n"
+        , prgver, prgname, prgname, prgname);
+    exit(0);
 }

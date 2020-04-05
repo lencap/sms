@@ -29,7 +29,6 @@ extern char svckey[256];
 
 // Functions prototypes
 void PrintUsage(void);
-void Die(int code, char * msg);
 void ProcessConfigFile(void);
 void CreateSkeletonConfigFile(void);
 void CURLPostData(char * url, char * data);

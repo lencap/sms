@@ -2,43 +2,32 @@
 
 #include "smsclic.h"
 
-// Graceful exit
-void Die(int code, char *msg)
-{
-    if (msg[0] != '\0') {
-        fprintf(stdout, "%s\n", msg);
-    }
-    exit(code);
-}
-
-
 // Set up global variables as per values in configuration file
 void ProcessConfigFile(void)
 {
-    char buf[256];
     char cfgfile[256];
 
     // Read config file
     sprintf(cfgfile, "%s/.%s", getenv("HOME"), "smsclirc");
     ini_t *config = ini_load(cfgfile);
     if (config == '\0') {
-        sprintf(buf, "Error. Missing %s file. Run %s -y to create a new one.", cfgfile, prgname);
-        Die(1, buf);
+        fprintf(stderr, "Missing %s file. Run %s -y to create a new one.", cfgfile, prgname);
+        exit(1);
     }
 
     const char *value;  // Temp string value
 
     value = ini_get(config, "global", "svcurl");
     if (value[0] == '\0') {
-        sprintf(buf, "Error. svcurl not defined in %s", cfgfile);
-        Die(1, buf);
+        fprintf(stderr, "svcurl not defined in %s", cfgfile);
+        exit(1);
     }
     strcpy(svcurl, value);
 
     value = ini_get(config, "global", "svckey");
     if (value[0] == '\0') {
-        sprintf(buf, "Error. svckey not defined in %s", cfgfile);
-        Die(1, buf);
+        fprintf(stderr, "svckey not defined in %s", cfgfile);
+        exit(1);
     }
     strcpy(svckey, value);
 
@@ -49,20 +38,19 @@ void ProcessConfigFile(void)
 // Create a skeleton configuration file with default hard-coded values
 void CreateSkeletonConfigFile(void)
 {
-    char buf[256];
     char cfgfile[256];
     FILE * fp;
 
     sprintf(cfgfile, "%s/.%src", getenv("HOME"), prgname);
     // https://stackoverflow.com/questions/230062/whats-the-best-way-to-check-if-a-file-exists-in-c
     if (access(cfgfile, F_OK) != -1) {
-        sprintf(buf, "Error. File %s already exist!", cfgfile);
-        Die(1, buf);
+        fprintf(stderr, "File %s already exist!", cfgfile);
+        exit(1);
     }
     fp = fopen(cfgfile, "w");
     if (fp == NULL) {
-        sprintf(buf, "Error creating file %s!\n", cfgfile);
-        Die(1, buf);
+        fprintf(stderr, "Error creating file %s!\n", cfgfile);
+        exit(1);
     }
     fprintf(fp, "# Edit below values accordingly\n");
     fprintf(fp, "[global]\n");
