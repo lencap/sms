@@ -1,5 +1,5 @@
 TARGET := smsclic
-VERSION := 1.1.0
+VERSION := 1.1.1
 
 .PHONY: release install clean
 
@@ -16,7 +16,7 @@ release:
 	shasum -a 256 $(TARGET)-$(VERSION).tar.gz
 
 install:
-	./install.sh $(TARGET)
+	install $(TARGET) /usr/local/bin/$(TARGET)
 
 clean:
 	rm -f $(TARGET) $(TARGET)*.gz $(OBJS)
